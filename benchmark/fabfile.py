@@ -7,6 +7,7 @@ from benchmark.utils import Print
 from benchmark.plot import Ploter, PlotError
 from benchmark.instance import InstanceManager
 from benchmark.remote import Bench, BenchError
+import csv
 
 
 @task
@@ -92,32 +93,48 @@ def install(ctx):
 
 @task
 def remote(ctx, debug=False):
+
     ''' Run benchmarks on AWS '''
-    bench_params = {
-        'faults': 0,
-        'nodes': [10],
-        'workers': 1,
-        'collocate': True,
-        'rate': [10_000, 150_000],
-        'tx_size': 512,
-        'duration': 300,
-        'runs': 2,
-        'is_attack': False,
-        'attack_level': 1,
-    }
-    node_params = {
-        'header_size': 1_000,  # bytes
-        'max_header_delay': 200,  # ms
-        'gc_depth': 50,  # rounds
-        'sync_retry_delay': 10_000,  # ms
-        'sync_retry_nodes': 3,  # number of nodes
-        'batch_size': 500_000,  # bytes
-        'max_batch_delay': 200  # ms
-    }
-    try:
-        Bench(ctx).run(bench_params, node_params, debug)
-    except BenchError as e:
-        Print.error(e)
+
+    file_path = 'benchmark/csv/peformance_data.csv'
+
+    # Open the CSV file
+    with open(file_path, mode='r') as file:
+        csv_reader = csv.reader(file)
+
+        # Iterate through each row in the CSV
+        for index, row in enumerate(csv_reader):
+            # Remove any extra spaces and assign to variables
+            faults = int(row[0].strip())
+            rate = int(row[1].strip())
+            is_attack = row[2].strip().lower() == 'true'
+            attack_level = int(row[3].strip())
+
+            bench_params = {
+                'faults': faults,
+                'nodes': [10],
+                'workers': 1,
+                'collocate': True,
+                'rate': [rate],
+                'tx_size': 512,
+                'duration': 120,
+                'runs': 1,
+                'is_attack': is_attack,
+                'attack_level': attack_level,
+            }
+            node_params = {
+                'header_size': 1_000,  # bytes
+                'max_header_delay': 200,  # ms
+                'gc_depth': 50,  # rounds
+                'sync_retry_delay': 10_000,  # ms
+                'sync_retry_nodes': 3,  # number of nodes
+                'batch_size': 500_000,  # bytes
+                'max_batch_delay': 200  # ms
+            }
+            try:
+                Bench(ctx).run(bench_params, node_params, debug)
+            except BenchError as e:
+                Print.error(e)
 
 
 @task
