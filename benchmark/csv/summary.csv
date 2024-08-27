@@ -1,0 +1,4 @@
+Faults,Nodes,Rate,Size,Is_Attack,Attack_Level,TPS,Latency ms
+0,10,30000,512,True,80,3143.0,19383.0
+0,10,30000,512,False,80,25471.0,3550.0
+1,10,10000,512,False,10,7712.0,4055.0
