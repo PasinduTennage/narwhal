@@ -49,6 +49,11 @@ class PathMaker:
         return join(PathMaker.logs_path(), f'primary-{i}.log')
 
     @staticmethod
+    def attack_log_file(i):
+        assert isinstance(i, int) and i >= 0
+        return join(PathMaker.logs_path(), f'attack-{i}.log')
+
+    @staticmethod
     def worker_log_file(i, j):
         assert isinstance(i, int) and i >= 0
         assert isinstance(j, int) and i >= 0

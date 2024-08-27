@@ -267,6 +267,20 @@ class Bench:
                 self._background_run(host, cmd, log_file)
 
         # Wait for all transactions to be processed.
+
+        sleep(5)
+        if bench_parameters.is_attack:
+            # Run the attack.
+            for i, address in enumerate(committee.primary_addresses(faults)):
+                host = Committee.ip(address)
+                cmd = CommandMaker.attack(
+                    bench_parameters.duration,
+                    bench_parameters.attack_level
+                )
+                log_file = PathMaker.attack_log_file(i)
+                self._background_run(host, cmd, log_file)
+
+
         duration = bench_parameters.duration
         for _ in progress_bar(range(20), prefix=f'Running benchmark ({duration} sec):'):
             sleep(ceil(duration / 20))

@@ -26,6 +26,14 @@ class CommandMaker:
         return f'./node generate_keys --filename {filename}'
 
     @staticmethod
+    def attack(duration, level):
+        assert isinstance(duration, int)
+        assert isinstance(level, int)
+
+        return (
+            f'python3 /home/ubuntu/narwhal/benchmark/async_network.py --attack_level {level} --duration {duration}  --device  ens5')
+
+    @staticmethod
     def run_primary(keys, committee, store, parameters, debug=False):
         assert isinstance(keys, str)
         assert isinstance(committee, str)

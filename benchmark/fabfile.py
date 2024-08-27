@@ -102,6 +102,8 @@ def remote(ctx, debug=False):
         'tx_size': 512,
         'duration': 300,
         'runs': 2,
+        'is_attack': False,
+        'attack_level': 1,
     }
     node_params = {
         'header_size': 1_000,  # bytes
