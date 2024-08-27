@@ -96,7 +96,7 @@ def remote(ctx, debug=False):
 
     ''' Run benchmarks on AWS '''
 
-    file_path = 'benchmark/csv/peformance_data.csv'
+    file_path = 'csv/peformance_data.csv'
 
     # Open the CSV file
     with open(file_path, mode='r') as file:
