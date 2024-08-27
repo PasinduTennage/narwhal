@@ -21,12 +21,12 @@ duration = args.duration
 
 def apply_traffic_delay():
     # Apply traffic delay of 500ms
-    os.system("tc qdisc add dev " + args.device + " root netem delay 500ms")
+    os.system("sudo tc qdisc add dev " + args.device + " root netem delay 500ms")
 
 
 def reset_traffic_delay():
     # Reset traffic rules
-    os.system("tc qdisc del dev " + args.device + " root netem")
+    os.system("sudo tc qdisc del dev " + args.device + " root netem")
 
 
 def main():
