@@ -6,6 +6,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Network traffic attack simulation script.")
 parser.add_argument("attack_level", type=int, help="Attack level (1-10)")
 parser.add_argument("duration", type=int, help="Duration to run the script (in seconds)")
+parser.add_argument("device", type=str, help="Device name")
 
 # Parse arguments
 args = parser.parse_args()
@@ -16,12 +17,12 @@ duration = args.duration
 
 def apply_traffic_delay():
     # Apply traffic delay of 500ms
-    os.system("tc qdisc add dev eth0 root netem delay 500ms")
+    os.system("tc qdisc add dev " +args.device+ " root netem delay 500ms")
 
 
 def reset_traffic_delay():
     # Reset traffic rules
-    os.system("tc qdisc del dev eth0 root netem")
+    os.system("tc qdisc del dev " +args.device+ " root netem")
 
 
 def main():
