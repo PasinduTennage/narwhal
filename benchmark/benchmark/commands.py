@@ -31,7 +31,7 @@ class CommandMaker:
         assert isinstance(level, int)
 
         return (
-            f'python3 /home/ubuntu/narwhal/benchmark/async_network.py --attack_level {level} --duration {duration}  --device  ens5')
+            f'python3 /home/ubuntu/narwhal/benchmark/benchmark/async_network.py --attack_level {level} --duration {duration}  --device  ens5')
 
     @staticmethod
     def run_primary(keys, committee, store, parameters, debug=False):
