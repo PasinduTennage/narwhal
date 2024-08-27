@@ -376,7 +376,9 @@ class Bench:
                             bench_parameters.workers,
                             bench_parameters.collocate,
                             r, 
-                            bench_parameters.tx_size, 
+                            bench_parameters.tx_size,
+                            bench_parameters.is_attack,
+                            bench_parameters.attack_level
                         ))
                     except (subprocess.SubprocessError, GroupException, ParseError) as e:
                         self.kill(hosts=selected_hosts)
