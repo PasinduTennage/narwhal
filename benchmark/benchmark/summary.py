@@ -23,7 +23,7 @@ def extract_end_to_end_metrics(file_name: str):
     return [end_to_end_tps, end_to_end_latency]
 
 
-file_path = 'csv/peformance_data.csv'
+file_path = 'csv/peformance_data_10.csv'
 output = 'csv/summary.csv'
 
 with open(file_path, mode='r') as file:
