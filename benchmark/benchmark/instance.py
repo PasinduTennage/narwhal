@@ -17,7 +17,7 @@ class AWSError(Exception):
 
 
 class InstanceManager:
-    INSTANCE_NAME = "dag-node"
+    INSTANCE_NAME = "dag-node-50"
     SECURITY_GROUP_NAME = "dag"
 
     def __init__(self, settings):
