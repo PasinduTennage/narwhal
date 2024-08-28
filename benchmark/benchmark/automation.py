@@ -43,9 +43,13 @@ with open(args.output_csv, mode='w') as output_file:
             rate = int(row[1].strip())
             is_attack = row[2].strip().lower() == 'true'
             attack_level = int(row[3].strip())
-
-            os.system(
-                f'fab remote --faults {faults} --rate {rate} --is_attack {is_attack} --attack_level {attack_level} --num_nodes {args.nodes} --size {args.size}')
+            cmd = ''
+            if is_attack:
+                cmd = f'fab remote --faults {faults} --rate {rate} --attackLevel {attack_level} --numNodes {args.nodes} --size {args.size} --isAttack'
+            else:
+                cmd = f'fab remote --faults {faults} --rate {rate} --attackLevel {attack_level} --numNodes {args.nodes} --size {args.size}'
+            print(cmd)
+            os.system(cmd)
 
             file = f'results/bench-{faults}-{args.nodes}-{1}-{True}-{rate}-{args.size}-{is_attack}-{attack_level}.txt'
 

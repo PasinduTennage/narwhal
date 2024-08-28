@@ -92,20 +92,20 @@ def install(ctx):
 
 
 @task
-def remote(ctx, debug=False, faults=0, rate=1000, is_attack=False, attack_level=0, num_nodes=10, size=512):
+def remote(ctx, debug=False, faults=0, rate=1000, attackLevel=0, numNodes=10, size=512, isAttack=False):
 
     ''' Run benchmarks on AWS '''
     bench_params = {
         'faults': faults,
-        'nodes': [num_nodes],
+        'nodes': [numNodes],
         'workers': 1,
         'collocate': True,
         'rate': [rate],
         'tx_size': size,
         'duration': 120,
         'runs': 1,
-        'is_attack': is_attack,
-        'attack_level': attack_level,
+        'is_attack': isAttack,
+        'attack_level': attackLevel,
     }
     node_params = {
         'header_size': 1_000,  # bytes
