@@ -112,7 +112,7 @@ def remote(ctx, debug=False):
 
             bench_params = {
                 'faults': faults,
-                'nodes': [10],
+                'nodes': [50],
                 'workers': 1,
                 'collocate': True,
                 'rate': [rate],
